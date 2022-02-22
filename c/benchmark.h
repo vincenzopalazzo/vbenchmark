@@ -10,6 +10,17 @@
 extern "C" void initialize(int args, char **argv)
 {
     benchmark::Initialize(&args, argv);
+    if (benchmark::ReportUnrecognizedArguments(args, argv)) return 1;
+    benchmark::RunSpecifiedBenchmarks();
+    benchmark::Shutdown();
+}
+
+extern "C" typedef benchmark::State BenchmarkState;
+extern "C" typedef void BenchmarkFn(BenchmarkState&);
+
+extern "C" void add_benchmark(const char *name, BenchmarkFn benchmark_fn)
+{
+    //BENCHMARK(benchmark_fn);
 }
 
 // doc https://www.oracle.com/technical-resources/articles/it-infrastructure/mixing-c-and-cplusplus.html#c_from_cpp

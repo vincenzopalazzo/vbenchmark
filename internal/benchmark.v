@@ -11,9 +11,17 @@ import utils
 // include the google benchmark include
 #include "benchmark.h"
 
-fn C.initialize(args int, voidptr char)
+type BenchmarkFn = fn (voidptr)
+
+fn C.initialize(args int, argv &&char)
+
+fn C.add_benchmark(name &char, benchamark_fn BenchmarkFn)
 
 /// Init the benchamarks
 pub fn init_benchamars() {
 	C.initialize(os.args.len, utils.c_args())
+}
+
+pub fn add_benchmark(name string, benchamark_fn BenchmarkFn) {
+	C.add_benchmark(&char(name.str), benchamark_fn)
 }
