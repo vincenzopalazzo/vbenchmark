@@ -9,3 +9,4 @@ fmt:
 
 clean:
 	rm vbenchmark
+	rm c/*.out
