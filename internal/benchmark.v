@@ -14,7 +14,6 @@ import utils
 fn C.initialize(args int, voidptr char)
 
 /// Init the benchamarks
-pub fn init_benchamars() { 
+pub fn init_benchamars() {
 	C.initialize(os.args.len, utils.c_args())
 }
-
