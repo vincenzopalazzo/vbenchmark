@@ -1,7 +1,7 @@
 CC=v
 VFLAGS=-cc g++ -cg
 
-default:
+default: fmt
 	$(CC) $(VFLAGS) .
 
 fmt:
