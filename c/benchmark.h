@@ -5,34 +5,30 @@
 #ifndef BENCHMARK_H
 #define BENCHMARK_H
 
-#include <functional>
-
+#include <iostream>
 #include <benchmark/benchmark.h>
 
-extern "C" int initialize(int args, char **argv)
-{
-    benchmark::Initialize(&args, argv);
-    if (benchmark::ReportUnrecognizedArguments(args, argv)) return 1;
-    return 0;
+using namespace benchmark;
+
+extern "C" {
+    typedef benchmark::State BenchmarkState; 
+    typedef void BenchmarkFn(BenchmarkState&);
+
+
+    int initialize(int argc, char **argv) {
+        benchmark::Initialize(&argc, argv);
+        for (int i = 0; i < argc; i++)
+            std::cout << argv[i] << ", ";
+        if (benchmark::ReportUnrecognizedArguments(argc, argv)) return 1;
+        benchmark::RunSpecifiedBenchmarks();
+        benchmark::Shutdown();
+        return 0;
+    }
+
+    void add_benchmark(const char *name, void (*benchmark_fn)(benchmark::State&)) {
+        benchmark::RegisterBenchmark(name, benchmark_fn);
+    }
+
 }
-
-extern "C" void run_benchmark()
-{
-    benchmark::RunSpecifiedBenchmarks();    
-}
-
-extern "C" void shoutdown()
-{
-    benchmark::Shutdown();
-}
-
-extern "C" typedef benchmark::State BenchmarkState;
-extern "C" typedef void BenchmarkFn(BenchmarkState&);
-
-extern "C" void add_benchmark(const char *name, void (*benchmark_fn)(benchmark::State&))
-{
-    BENCHMARK(*benchmark_fn)->Args({1<<10, 128});
-}
-
 // doc https://www.oracle.com/technical-resources/articles/it-infrastructure/mixing-c-and-cplusplus.html#c_from_cpp
 #endif
