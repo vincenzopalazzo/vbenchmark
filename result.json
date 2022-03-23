@@ -1,11 +1,11 @@
 {
   "context": {
-    "date": "2022-03-23T21:17:43+01:00",
+    "date": "2022-03-23T22:12:42+01:00",
     "host_name": "vincent",
     "executable": "./vbenchmark",
     "num_cpus": 4,
-    "mhz_per_cpu": 3000,
-    "cpu_scaling_enabled": true,
+    "mhz_per_cpu": 2911,
+    "cpu_scaling_enabled": false,
     "caches": [
       {
         "type": "Data",
@@ -32,7 +32,37 @@
         "num_sharing": 4
       }
     ],
-    "load_avg": [1.82,1.57,1.52],
+    "load_avg": [0.96,1.21,1.27],
     "library_build_type": "release"
   },
   "benchmarks": [
+    {
+      "name": "Insert in BSTree",
+      "family_index": 0,
+      "per_family_instance_index": 0,
+      "run_name": "Insert in BSTree",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 148,
+      "real_time": 4.0305158445089296e+06,
+      "cpu_time": 4.0249364324324327e+06,
+      "time_unit": "ns"
+    },
+    {
+      "name": "Assign variable",
+      "family_index": 1,
+      "per_family_instance_index": 0,
+      "run_name": "Assign variable",
+      "run_type": "iteration",
+      "repetitions": 1,
+      "repetition_index": 0,
+      "threads": 1,
+      "iterations": 196105059,
+      "real_time": 3.6251959210760010e+00,
+      "cpu_time": 3.6164084527773439e+00,
+      "time_unit": "ns"
+    }
+  ]
+}
