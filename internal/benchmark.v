@@ -16,10 +16,8 @@ struct C.State {}
 
 type BenchmarkFn = fn ()
 
-[keep_args_alive]
 fn C.initialize(args int, argv voidptr) int
 
-[keep_args_alive]
 fn C.add_benchmark(name &char, benchamark_fn BenchmarkFn)
 
 /// Init the benchamarks

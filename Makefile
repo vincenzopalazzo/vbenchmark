@@ -2,7 +2,7 @@ CC=v
 VFLAGS=-cc g++ -g -keepc
 
 default: fmt
-	$(CC) $(VFLAGS) .
+	$(CC) $(VFLAGS) example/main.v
 
 fmt:
 	$(CC) -w fmt .
