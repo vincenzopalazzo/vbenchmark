@@ -16,14 +16,15 @@ struct C.State {}
 
 type BenchmarkFn = fn ()
 
-fn C.initialize(args int, argv &&char) int
+[keep_args_alive]
+fn C.initialize(args int, argv voidptr) int
 
+[keep_args_alive]
 fn C.add_benchmark(name &char, benchamark_fn BenchmarkFn)
 
 /// Init the benchamarks
 pub fn run_benchamars() int {
-	cargs := utils.c_args()
-	return C.initialize(os.args.len, cargs)
+	return C.initialize(os.args.len, utils.c_args())
 }
 
 pub fn add_benchmark(name string, benchamark_fn BenchmarkFn) {

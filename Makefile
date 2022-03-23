@@ -1,5 +1,5 @@
 CC=v
-VFLAGS=-cc g++ -cg -autofree
+VFLAGS=-cc g++ -g -keepc
 
 default: fmt
 	$(CC) $(VFLAGS) .

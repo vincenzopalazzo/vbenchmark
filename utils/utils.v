@@ -3,12 +3,10 @@ module utils
 import os
 
 // Get the command line args
-pub fn c_args() &&char {
+pub fn c_args() voidptr {
 	mut cargs := []&char{}
-	for v_arg in os.args {
-		println(v_arg.str())
-		cargs << &char(v_arg.str)
+	for i in 0 .. os.args.len {
+		cargs << &char(os.args[i].str)
 	}
-	cargs << &char(0)
 	return cargs.data
 }

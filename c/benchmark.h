@@ -16,17 +16,22 @@ extern "C" {
 
 
     int initialize(int argc, char **argv) {
+        std::cout << argc << "\n";
         benchmark::Initialize(&argc, argv);
-        for (int i = 0; i < argc; i++)
-            std::cout << argv[i] << ", ";
+       
         if (benchmark::ReportUnrecognizedArguments(argc, argv)) return 1;
         benchmark::RunSpecifiedBenchmarks();
         benchmark::Shutdown();
         return 0;
     }
 
-    void add_benchmark(const char *name, void (*benchmark_fn)(benchmark::State&)) {
-        benchmark::RegisterBenchmark(name, benchmark_fn);
+    void iterate_over_function(BenchmarkState &state, void (*fn)(BenchmarkState&)) {
+            for (auto _ : state)
+                fn(state);        
+    }
+
+    void add_benchmark(const char *name, void (*benchmark_fn)(BenchmarkState&)) {
+        benchmark::RegisterBenchmark(name, iterate_over_function, benchmark_fn);
     }
 
 }
