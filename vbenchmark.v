@@ -1,3 +1,5 @@
+module vbenchmark
+
 import internal
 
 /// Init the benchamarks
