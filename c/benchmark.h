@@ -5,7 +5,6 @@
 #ifndef BENCHMARK_H
 #define BENCHMARK_H
 
-#include <iostream>
 #include <benchmark/benchmark.h>
 
 using namespace benchmark;
@@ -16,7 +15,6 @@ extern "C" {
 
 
     int initialize(int argc, char **argv) {
-        std::cout << argc << "\n";
         benchmark::Initialize(&argc, argv);
        
         if (benchmark::ReportUnrecognizedArguments(argc, argv)) return 1;
