@@ -6,8 +6,7 @@ import os
 pub fn c_args() voidptr {
 	mut cargs := []&char{}
 	for i in 0 .. os.args.len {
-		arg := &char(os.args[i].str)
-		cargs << arg
+		cargs << &char(os.args[i].str)
 	}
 	return cargs.data
 }
