@@ -1,6 +1,7 @@
 name: vlang-build-pipeline
 
 on:
+  pull_request:
   push:
     paths-ignore:
       - '**.md'
@@ -27,12 +28,7 @@ jobs:
         v-version: latest
       id: v
     - name: V lang check code formatted
-      run: v fmt -diff . && v fmt -verify .
-    - name: Compiler and run the examples
-      run: |
-          git clone https://github.com/google/benchmark.git
-          cd benchmark
-          cmake -E make_directory "build"
-          cmake -E chdir "build" cmake -DBENCHMARK_DOWNLOAD_DEPENDENCIES=on -DCMAKE_BUILD_TYPE=Release ../
-          sudo cmake --build "build" --config Release --target install
-          v example/main.v && ./main
+      run: | 
+        v fmt -diff internal && v fmt -verify internal
+        v fmt -diff utils && v fmt -verify utils
+        v fmt -diff vbenchmark.v && v fmt -verify vbenchmark.v
