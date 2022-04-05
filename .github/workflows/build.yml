@@ -1,0 +1,34 @@
+name: vlang-build-pipeline
+
+on:
+  pull_request:
+  push:
+    paths-ignore:
+      - '**.md'
+
+jobs:
+  run:
+    name: Run
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Set up GCC
+      uses: egor-tensin/setup-gcc@v1
+      with:
+        version: latest
+        platform: x64
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.12
+      with:
+        cmake-version: '3.16.x'
+    - name: Set up V version latest
+      uses: nocturlab/setup-vlang-action@v1
+      with:
+        v-version: latest
+      id: v
+    - name: V lang check code formatted
+      run: | 
+        v fmt -diff internal && v fmt -verify internal
+        v fmt -diff utils && v fmt -verify utils
+        v fmt -diff vbenchmark.v && v fmt -verify vbenchmark.v
